@@ -47,14 +47,12 @@ async function sendEmail(
   }
 }
 
-export const onRequestPost: PagesFunction<Env> = async (req, env) => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
-  }
+export const onRequestOptions: PagesFunction<Env> = async () => {
+  return new Response(null, { status: 204, headers: corsHeaders });
+};
 
-  if (req.method !== "POST") {
-    return json(405, { error: "Method not allowed" });
-  }
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+  const { request, env } = context;
 
   if (!env.RESEND_API_KEY) {
     console.error("RESEND_API_KEY is not configured");
@@ -62,8 +60,7 @@ export const onRequestPost: PagesFunction<Env> = async (req, env) => {
   }
 
   // Geo-block: only allow requests originating from the United States.
-  // req.cf.country is populated by Cloudflare's network from the client IP.
-  if (req.cf?.country !== "US") {
+  if ((request as Request & { cf?: { country?: string } }).cf?.country !== "US") {
     return json(451, {
       error:
         "We're unable to accept inquiries from outside the United States at this time. Please email us directly at joanne@therheagroup.com.",
@@ -72,7 +69,7 @@ export const onRequestPost: PagesFunction<Env> = async (req, env) => {
 
   let data: ContactPayload;
   try {
-    data = (await req.json()) as ContactPayload;
+    data = (await request.json()) as ContactPayload;
   } catch {
     return json(400, { error: "Invalid JSON body" });
   }
