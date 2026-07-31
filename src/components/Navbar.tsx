@@ -38,7 +38,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
-              src="/assets/images/logonotexttransparent.png"
+              src="/assets/images/Rhea_Logo_Transparent.png"
               alt="The Rhea Group"
               className="h-14 w-14 md:h-20 md:w-20 object-contain shrink-0"
             />
@@ -116,7 +116,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
             <div className="flex items-center gap-3">
               <img
-                src="/assets/images/logonotexttransparent.png"
+                src="/assets/images/Rhea_Logo_Transparent.png"
                 alt="The Rhea Group"
                 className="h-16 w-16 object-contain"
               />
