@@ -28,20 +28,19 @@ export default function Navbar() {
   return (
     <>
       <header
-        style={{ paddingTop: 'env(safe-area-inset-top)' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 overflow-visible ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled || !isHome
-            ? 'bg-cream-50/90 backdrop-blur-2xl shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
-            : 'bg-transparent'
+            ? 'bg-cream-50/90 backdrop-blur-2xl py-0 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
+            : 'bg-transparent py-0'
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between py-4 md:py-5 overflow-visible">
+        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
-              src={scrolled || !isHome ? '/assets/images/rhea-icon-fullcolor.png' : '/assets/images/rhea-icon-reversed.png'}
-              alt="The Rhea Group icon"
-              className="h-8 w-8 md:h-12 md:w-12 object-contain"
+              src="/assets/images/logonotexttransparent.png"
+              alt="The Rhea Group"
+              className="h-24 w-24 object-contain"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
@@ -117,9 +116,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
             <div className="flex items-center gap-3">
               <img
-                src="/assets/images/rhea-icon-reversed.png"
+                src="/assets/images/logonotexttransparent.png"
                 alt="The Rhea Group"
-                className="h-12 w-12 object-contain"
+                className="h-16 w-16 object-contain"
               />
               <span className="font-label text-[13px] font-semibold tracking-[0.25em] uppercase text-cream-50">
                 The Rhea Group
