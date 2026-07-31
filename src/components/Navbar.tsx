@@ -40,10 +40,10 @@ export default function Navbar() {
             <img
               src="/assets/images/Rhea_Logo_Transparent.png"
               alt="The Rhea Group"
-              className="h-11 w-11 sm:h-14 sm:w-14 md:h-20 md:w-20 object-contain shrink-0"
+              className="h-14 w-14 md:h-20 md:w-20 object-contain shrink-0"
             />
             <span
-              className={`hidden sm:block font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
+              className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
                 scrolled || !isHome ? 'text-navy-800' : 'text-cream-50'
               }`}
             >
