@@ -2,8 +2,6 @@ name = "the-rhea-group"
 compatibility_date = "2024-12-01"
 pages_build_output_dir = "./dist"
 
-# The EMAIL send_email binding cannot be declared here for Pages projects.
-# Add it manually in the Cloudflare dashboard:
-#   Pages project → Settings → Functions → Email bindings
-#   Binding name: EMAIL
-#   Destination address: joanne@therheagroup.com
+# Resend API key — add as a secret (do NOT put the value here):
+#   npx wrangler pages secret put RESEND_API_KEY --project-name the-rhea-group
+# Then paste your Resend API key (re_xxxxxxxx) when prompted.

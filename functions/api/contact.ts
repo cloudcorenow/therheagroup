@@ -5,11 +5,12 @@ import {
 } from "../_email-template";
 
 interface Env {
-  EMAIL: SendEmail;
+  RESEND_API_KEY: string;
 }
 
 const CONTACT_TO_EMAIL = "joanne@therheagroup.com";
 const CONTACT_FROM_EMAIL = "noreply@therheagroup.com";
+const RESEND_API_URL = "https://api.resend.com/emails";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -24,6 +25,28 @@ function json(status: number, body: unknown): Response {
   });
 }
 
+async function sendEmail(
+  apiKey: string,
+  from: string,
+  to: string,
+  subject: string,
+  html: string,
+): Promise<void> {
+  const res = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from, to: [to], subject, html }),
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`Resend API error (${res.status}): ${detail}`);
+  }
+}
+
 export const onRequestPost: PagesFunction<Env> = async (req, env) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
@@ -31,6 +54,11 @@ export const onRequestPost: PagesFunction<Env> = async (req, env) => {
 
   if (req.method !== "POST") {
     return json(405, { error: "Method not allowed" });
+  }
+
+  if (!env.RESEND_API_KEY) {
+    console.error("RESEND_API_KEY is not configured");
+    return json(500, { error: "Email service is not configured" });
   }
 
   // Geo-block: only allow requests originating from the United States.
@@ -66,20 +94,22 @@ export const onRequestPost: PagesFunction<Env> = async (req, env) => {
 
   try {
     // 1. Branded notification to the team
-    await env.EMAIL.send({
-      from: CONTACT_FROM_EMAIL,
-      to: CONTACT_TO_EMAIL,
-      subject: `New Inquiry from ${data.name}${data.company ? ` (${data.company})` : ""}`,
-      html: buildNotificationEmail(data, submittedAt),
-    });
+    await sendEmail(
+      env.RESEND_API_KEY,
+      CONTACT_FROM_EMAIL,
+      CONTACT_TO_EMAIL,
+      `New Inquiry from ${data.name}${data.company ? ` (${data.company})` : ""}`,
+      buildNotificationEmail(data, submittedAt),
+    );
 
     // 2. Auto-reply to the submitter
-    await env.EMAIL.send({
-      from: CONTACT_FROM_EMAIL,
-      to: data.email,
-      subject: `Thank you for contacting The Rhea Group`,
-      html: buildAutoReplyEmail(data),
-    });
+    await sendEmail(
+      env.RESEND_API_KEY,
+      CONTACT_FROM_EMAIL,
+      data.email,
+      "Thank you for contacting The Rhea Group",
+      buildAutoReplyEmail(data),
+    );
 
     return json(200, { ok: true });
   } catch (err) {
