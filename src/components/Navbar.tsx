@@ -30,17 +30,17 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled || !isHome
-            ? 'bg-cream-50/90 backdrop-blur-2xl py-0 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
-            : 'bg-transparent py-0'
+            ? 'bg-cream-50/90 backdrop-blur-2xl py-2 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
+            : 'bg-transparent py-3'
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between h-16 md:h-auto">
+        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
               src="/assets/images/logonotexttransparent.png"
               alt="The Rhea Group"
-              className="h-12 w-12 md:h-20 md:w-20 object-contain"
+              className="h-10 w-auto md:h-16 md:w-auto object-contain"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
