@@ -35,13 +35,13 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between py-3 md:py-4">
+        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between py-4 md:py-5 overflow-visible">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
-              src="/assets/images/logonotexttransparent.png"
-              alt="The Rhea Group"
-              className="h-10 w-auto md:h-16 md:w-auto object-contain"
+              src={scrolled || !isHome ? '/assets/images/rhea-icon-fullcolor.png' : '/assets/images/rhea-icon-reversed.png'}
+              alt="The Rhea Group icon"
+              className="h-8 w-8 md:h-12 md:w-12 object-contain"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
@@ -117,9 +117,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
             <div className="flex items-center gap-3">
               <img
-                src="/assets/images/logonotexttransparent.png"
+                src="/assets/images/rhea-icon-reversed.png"
                 alt="The Rhea Group"
-                className="h-16 w-16 object-contain"
+                className="h-12 w-12 object-contain"
               />
               <span className="font-label text-[13px] font-semibold tracking-[0.25em] uppercase text-cream-50">
                 The Rhea Group
