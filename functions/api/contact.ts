@@ -1,0 +1,89 @@
+import {
+  buildAutoReplyEmail,
+  buildNotificationEmail,
+  type ContactPayload,
+} from "../_email-template";
+
+interface Env {
+  EMAIL: SendEmail;
+}
+
+const CONTACT_TO_EMAIL = "joanne@therheagroup.com";
+const CONTACT_FROM_EMAIL = "noreply@therheagroup.com";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function json(status: number, body: unknown): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
+export const onRequestPost: PagesFunction<Env> = async (req, env) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    return json(405, { error: "Method not allowed" });
+  }
+
+  // Geo-block: only allow requests originating from the United States.
+  // req.cf.country is populated by Cloudflare's network from the client IP.
+  if (req.cf?.country !== "US") {
+    return json(451, {
+      error:
+        "We're unable to accept inquiries from outside the United States at this time. Please email us directly at joanne@therheagroup.com.",
+    });
+  }
+
+  let data: ContactPayload;
+  try {
+    data = (await req.json()) as ContactPayload;
+  } catch {
+    return json(400, { error: "Invalid JSON body" });
+  }
+
+  if (!data.name?.trim() || !data.email?.trim() || !data.message?.trim()) {
+    return json(422, { error: "Missing required fields: name, email, message" });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(data.email)) {
+    return json(422, { error: "Invalid email address" });
+  }
+
+  if (data.message.length > 5000) {
+    return json(422, { error: "Message too long (max 5000 characters)" });
+  }
+
+  const submittedAt = new Date().toISOString();
+
+  try {
+    // 1. Branded notification to the team
+    await env.EMAIL.send({
+      from: CONTACT_FROM_EMAIL,
+      to: CONTACT_TO_EMAIL,
+      subject: `New Inquiry from ${data.name}${data.company ? ` (${data.company})` : ""}`,
+      html: buildNotificationEmail(data, submittedAt),
+    });
+
+    // 2. Auto-reply to the submitter
+    await env.EMAIL.send({
+      from: CONTACT_FROM_EMAIL,
+      to: data.email,
+      subject: `Thank you for contacting The Rhea Group`,
+      html: buildAutoReplyEmail(data),
+    });
+
+    return json(200, { ok: true });
+  } catch (err) {
+    console.error("Email send failed:", err);
+    return json(502, { error: "Failed to send email" });
+  }
+};

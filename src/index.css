@@ -1,0 +1,312 @@
+/* Fonts loaded via index.html for optimal LCP */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-navy: #123D58;
+  --color-gold: #c8906A;
+  --color-gold-light: #D4B898;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #FAF8F5;
+  color: #123D58;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Inter for all headings — clean sans-serif hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Montserrat for labels, eyebrows, card titles */
+.font-label {
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* Focus-visible outline for accessibility */
+*:focus-visible {
+  outline: 2px solid #c8906A;
+  outline-offset: 3px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f1eb;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c8906A, #b07a58);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #D4B898, #c8906A);
+}
+
+/* Selection */
+::selection {
+  background: rgba(200, 144, 106, 0.2);
+  color: #091d34;
+}
+
+/* ─── Link underline ─── */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #c8906A, #D4B898);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-underline:hover::after,
+.link-underline.is-active::after {
+  width: 100%;
+}
+
+/* ─── Hero overlay ─── */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 19, 36, 0.92) 0%,
+    rgba(13, 45, 69, 0.78) 50%,
+    rgba(18, 61, 88, 0.45) 100%
+  );
+}
+
+/* ─── Animations ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* ─── Gold divider ─── */
+.gold-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, #c8906A, #D4B898);
+}
+
+/* ─── Glass ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.glass-dark {
+  background: rgba(6, 19, 36, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 184, 152, 0.12);
+}
+
+/* ─── Gold gradient text ─── */
+.gold-text {
+  background: linear-gradient(135deg, #c8906A 0%, #D4B898 50%, #e6bd9e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── Card hover: subtle, no lift ─── */
+.card-lift {
+  transition: border-color 0.5s ease, background-color 0.5s ease;
+}
+.card-lift:hover {
+  border-color: rgba(200, 144, 106, 0.5);
+}
+
+/* ─── Button shine ─── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+.btn-shine:hover::before {
+  left: 100%;
+}
+
+/* ─── Icon container: refined, no border ring ─── */
+.icon-luxe {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Shimmer text ─── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg, #c8906A, #D4B898 25%, #e6bd9e 50%, #D4B898 75%, #c8906A);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ─── Border gradient ─── */
+.border-gradient {
+  position: relative;
+  background-clip: padding-box;
+}
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(212, 184, 152, 0.35), rgba(212, 184, 152, 0.04));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Texture overlays ─── */
+.texture-overlay {
+  position: relative;
+}
+.texture-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+.paper-texture-dark {
+  position: relative;
+}
+.paper-texture-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+/* ─── Accordion ─── */
+details > summary::-webkit-details-marker { display: none; }
+details > summary { list-style: none; }
+details[open] .faq-content {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ─── Input focus ─── */
+.input-luxe:focus {
+  box-shadow: 0 0 0 3px rgba(200, 144, 106, 0.12);
+}
+
+/* ─── Editorial pull-quote mark ─── */
+.pull-quote-mark {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 5rem;
+  line-height: 0.6;
+  font-weight: 200;
+}
+
+/* ─── Hairline rule ─── */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 144, 106, 0.25), transparent);
+}
+
+/* ─── Vertical label ─── */
+.vertical-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.3em;
+}
+
+/* ─── Image reveal mask ─── */
+.img-reveal {
+  clip-path: inset(0 0 100% 0);
+  animation: imgReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes imgReveal {
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* ─── Editorial number ─── */
+.editorial-num {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 200;
+  font-variant-numeric: lining-nums;
+}
+
+/* ─── Refined hover for dark cards ─── */
+.dark-card-hover {
+  transition: background-color 0.6s ease, border-color 0.6s ease;
+}
+.dark-card-hover:hover {
+  background-color: rgba(13, 45, 69, 0.5);
+  border-color: rgba(212, 184, 152, 0.2);
+}
+
+/* ─── Premium: letter-spacing for large headings ─── */
+.tracking-tighter-2 {
+  letter-spacing: -0.03em;
+}
+
+/* ─── Premium: subtle text reveal ─── */
+.text-reveal {
+  display: inline-block;
+  overflow: hidden;
+}
+.text-reveal > span {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: textReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes textReveal {
+  to { transform: translateY(0); }
+}
+
+/* ─── Premium: line draw animation ─── */
+.line-draw {
+  width: 0;
+  animation: lineDraw 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes lineDraw {
+  to { width: 100%; }
+}
+
+/* ─── Premium: stagger reveal ─── */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerReveal 0.6s ease forwards;
+}
+@keyframes staggerReveal {
+  to { opacity: 1; transform: translateY(0); }
+}

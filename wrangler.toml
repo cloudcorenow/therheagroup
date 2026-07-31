@@ -1,0 +1,9 @@
+name = "the-rhea-group"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "./dist"
+
+# The EMAIL send_email binding cannot be declared here for Pages projects.
+# Add it manually in the Cloudflare dashboard:
+#   Pages project → Settings → Functions → Email bindings
+#   Binding name: EMAIL
+#   Destination address: joanne@therheagroup.com
