@@ -9,7 +9,7 @@ interface Env {
 }
 
 const CONTACT_TO_EMAIL = "joanne@therheagroup.com";
-const CONTACT_FROM_EMAIL = "noreply@therheagroup.com";
+const CONTACT_FROM_EMAIL = "Rhea Group <noreply@notifications.therheagroup.com>";
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 const corsHeaders = {
