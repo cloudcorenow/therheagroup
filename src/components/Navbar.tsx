@@ -40,7 +40,7 @@ export default function Navbar() {
             <img
               src="/assets/images/logonotexttransparent.png"
               alt="The Rhea Group"
-              className="h-24 w-24 object-contain"
+              className="h-14 w-14 md:h-24 md:w-24 object-contain"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
