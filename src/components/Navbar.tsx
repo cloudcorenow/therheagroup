@@ -28,10 +28,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 overflow-visible ${
           scrolled || !isHome
-            ? 'bg-cream-50/90 backdrop-blur-2xl py-0 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
-            : 'bg-transparent py-0'
+            ? 'bg-cream-50/90 backdrop-blur-2xl py-2 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
+            : 'bg-transparent py-2'
         }`}
       >
         <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between">
@@ -40,7 +40,7 @@ export default function Navbar() {
             <img
               src="/assets/images/logonotexttransparent.png"
               alt="The Rhea Group"
-              className="h-14 w-14 md:h-24 md:w-24 object-contain"
+              className="h-14 w-14 md:h-20 md:w-20 object-contain shrink-0"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
