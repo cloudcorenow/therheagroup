@@ -28,13 +28,14 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 overflow-visible ${
           scrolled || !isHome
-            ? 'bg-cream-50/90 backdrop-blur-2xl py-2 shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
-            : 'bg-transparent py-3'
+            ? 'bg-cream-50/90 backdrop-blur-2xl shadow-[0_1px_0_0_rgba(200,144,106,0.12)]'
+            : 'bg-transparent'
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between">
+        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between py-3 md:py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
