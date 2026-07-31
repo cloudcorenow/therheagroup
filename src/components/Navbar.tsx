@@ -34,13 +34,13 @@ export default function Navbar() {
             : 'bg-transparent py-0'
         }`}
       >
-        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between">
+        <nav className="mx-auto max-w-7xl px-4 lg:px-6 flex items-center justify-between h-16 md:h-auto">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3" aria-label="The Rhea Group home">
             <img
               src="/assets/images/logonotexttransparent.png"
               alt="The Rhea Group"
-              className="h-24 w-24 object-contain"
+              className="h-12 w-12 md:h-20 md:w-20 object-contain"
             />
             <span
               className={`font-label text-[13px] font-semibold tracking-[0.25em] uppercase transition-colors duration-500 ${
