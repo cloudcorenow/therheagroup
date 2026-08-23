@@ -1,0 +1,7 @@
+name = "the-rhea-group"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "./dist"
+
+# Resend API key — add as a secret (do NOT put the value here):
+#   npx wrangler pages secret put RESEND_API_KEY --project-name the-rhea-group
+# Then paste your Resend API key (re_xxxxxxxx) when prompted.
